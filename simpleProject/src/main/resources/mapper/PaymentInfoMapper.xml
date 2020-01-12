@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.mapper.PaymentInfoMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yc.entity.PaymentInfo">
+        <result column="id_clm_payment_info" property="idClmPaymentInfo"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP"/>
+        <result column="client_name" property="clientName"/>
+        <result column="client_type" property="clientType"/>
+        <result column="client_bank_account" property="clientBankAccount"/>
+        <result column="client_bank_code" property="clientBankCode"/>
+        <result column="client_bank_name" property="clientBankName"/>
+        <result column="bank_info_attribute" property="bankInfoAttribute"/>
+        <result column="cert_type" property="certType"/>
+        <result column="cert_no" property="certNo"/>
+        <result column="payment_info_status" property="paymentInfoStatus"/>
+        <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP"/>
+        <result column="document_id" property="documentId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id_clm_payment_info AS idClmPaymentInfo,
+        created_by AS createdBy,
+        created_date AS createdDate,
+        updated_by AS updatedBy,
+        updated_date AS updatedDate,
+        client_name AS clientName,
+        client_type AS clientType,
+        client_bank_account AS clientBankAccount,
+        client_bank_code AS clientBankCode,
+        client_bank_name AS clientBankName,
+        bank_info_attribute AS bankInfoAttribute,
+        cert_type AS certType,
+        cert_no AS certNo,
+        payment_info_status AS paymentInfoStatus,
+        delete_time AS deleteTime,
+        document_id AS documentId
+    </sql>
+
+
+    <insert id="insertPaymentInfo" parameterType="com.yc.entity.PaymentInfo">
+        INSERT INTO clm_payment_info
+        (created_by,updated_by,id_clm_payment_info,client_name,client_type,
+        client_bank_account,client_bank_code,client_bank_name,bank_info_attribute,
+        cert_type,cert_no,payment_info_status)
+        values
+        (#{createdBy,jdbcType=VARCHAR},
+        #{updatedBy,jdbcType=VARCHAR},
+        #{idClmPaymentInfo,jdbcType=VARCHAR},
+        #{clientName,jdbcType=VARCHAR},
+        #{clientType,jdbcType=VARCHAR},
+        #{clientBankAccount,jdbcType=VARCHAR},
+        #{clientBankCode,jdbcType=VARCHAR},
+        #{clientBankName,jdbcType=VARCHAR},
+        #{bankInfoAttribute,jdbcType=VARCHAR},
+        #{certType,jdbcType=VARCHAR},
+        #{certNo,jdbcType=VARCHAR},
+        #{paymentInfoStatus,jdbcType=VARCHAR});
+    </insert>
+
+    <insert id="updateDocumentId" parameterType="java.util.Map">
+        update ${tableName} set document_id = #{documentId} where id_clm_payment_info=#{idClmPaymentInfo}
+    </insert>
+</mapper>
